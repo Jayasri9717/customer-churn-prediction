@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="Customer Churn Prediction — interactive demo and machine learning workflow.">
+<title>Customer Churn Prediction | ChurnGuard</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#121d30;--panel2:#17243a;--text:#edf4ff;--muted:#99abc4;--line:#273650;--accent:#4adebc;--blue:#76a7ff;--danger:#ff8295}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#1a3550 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--accent)}.wrap{max-width:1120px;margin:auto;padding:28px 20px 56px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:46px}.brand{font-weight:800;letter-spacing:.04em}.tag{color:var(--accent);border:1px solid #2b806f;border-radius:999px;padding:5px 10px;font-size:.8rem}header h1{font-size:clamp(2.25rem,6vw,4.6rem);letter-spacing:-.055em;line-height:1.05;margin:.5rem 0 1rem;max-width:800px}header p{color:var(--muted);max-width:720px;font-size:1.08rem}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.15em;font-size:.75rem;font-weight:800}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}.metric,.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(155deg,var(--panel2),var(--panel));padding:22px}.metric strong{display:block;font-size:1.7rem}.metric span{color:var(--muted);font-size:.9rem}.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card h2{margin:0 0 6px;font-size:1.25rem}.muted{color:var(--muted);font-size:.94rem;margin-top:0}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;font-size:.9rem;color:#c5d3e7}input,select{width:100%;margin-top:6px;background:#0b1424;border:1px solid #34445e;border-radius:10px;padding:11px;color:var(--text);font:inherit}input:focus,select:focus{outline:2px solid var(--blue);border-color:transparent}.wide{grid-column:1/-1}button{margin-top:18px;background:var(--accent);color:#06221e;border:0;border-radius:11px;padding:12px 17px;font-weight:800;font:inherit;cursor:pointer}button:hover{filter:brightness(1.07)}.result{margin-top:18px;padding:16px;border-radius:12px;background:#0a1624;border:1px solid var(--line);display:none}.result.show{display:block}.result strong{font-size:1.2rem}.result small{display:block;color:var(--muted);margin-top:6px}.bar{height:9px;background:#26364b;border-radius:99px;overflow:hidden;margin:12px 0}.bar span{display:block;height:100%;width:50%;background:var(--accent)}.steps{display:grid;gap:12px;margin-top:18px}.step{display:flex;gap:12px;align-items:flex-start}.num{flex:0 0 32px;height:32px;display:grid;place-items:center;background:#183e3b;color:var(--accent);border-radius:10px;font-weight:800}.step p{margin:0;color:var(--muted);font-size:.92rem}.step b{display:block;color:var(--text);margin-bottom:2px}.notice{margin-top:18px;padding:13px 15px;border-left:3px solid var(--blue);background:#101c2d;color:var(--muted);font-size:.9rem}.footer{margin-top:46px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:.9rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}@media(max-width:780px){.layout{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}.top{margin-bottom:30px}}@media(max-width:450px){.formgrid{grid-template-columns:1fr}.wide{grid-column:auto}.wrap{padding:20px 14px 38px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><div class="brand">◈ CHURNGUARD</div><span class="tag">ML PROJECT DEMO</span></div>
+<header><p class="eyebrow">Customer intelligence · Retention analytics</p><h1>Understand churn.<br><span style="color:var(--accent)">Protect loyalty.</span></h1><p>An interactive showcase for the Customer Churn Prediction project. Explore how customer tenure, contract type, and billing patterns can inform retention decisions.</p></header>
+<section class="metrics" aria-label="Project highlights"><div class="metric"><strong>01 <span style="font-size:1rem;color:var(--accent)">/ Pipeline</span></strong><span>Load, explore, clean, and validate customer data</span></div><div class="metric"><strong>02 <span style="font-size:1rem;color:var(--accent)">/ Model</span></strong><span>Logistic regression classification workflow</span></div><div class="metric"><strong>03 <span style="font-size:1rem;color:var(--accent)">/ Action</span></strong><span>Use risk signals to guide retention outreach</span></div></section>
+<div class="layout">
+<section class="card"><h2>Customer risk explorer</h2><p class="muted">Adjust a sample profile to explore heuristic risk signals. This browser demo is illustrative, not a live trained model.</p>
+<form id="churnForm"><div class="formgrid">
+<label>Tenure (months)<input id="tenure" type="number" min="0" max="72" value="8" required></label>
+<label>Monthly charges (₹ / units)<input id="charges" type="number" min="0" max="1000" step=".01" value="85" required></label>
+<label>Contract type<select id="contract"><option value="month">Month-to-month</option><option value="year">One year</option><option value="two">Two year</option></select></label>
+<label>Internet service<select id="internet"><option value="fiber">Fiber optic</option><option value="dsl">DSL</option><option value="none">No internet</option></select></label>
+<label>Payment method<select id="payment"><option value="electronic">Electronic check</option><option value="bank">Bank transfer</option><option value="card">Credit card</option><option value="mail">Mailed check</option></select></label>
+<label>Paperless billing<select id="paperless"><option value="yes">Yes</option><option value="no">No</option></select></label>
+</div><button type="submit">Explore risk signals ↗</button></form>
+<div class="result" id="result" aria-live="polite"><strong id="resultTitle"></strong><div class="bar"><span id="riskBar"></span></div><div id="resultText"></div><small>Illustrative score based on simple rules; not generated by the Python model.</small></div>
+</section>
+<aside class="card"><h2>Project workflow</h2><p class="muted">The repository's Python pipeline is organized into four tasks.</p><div class="steps">
+<div class="step"><div class="num">01</div><div><b>Load & explore</b><p>Inspect rows, data types, missing values, duplicates, and churn distribution.</p></div></div>
+<div class="step"><div class="num">02</div><div><b>Clean the dataset</b><p>Normalize labels, handle missing charges, remove duplicates, and check invalid values.</p></div></div>
+<div class="step"><div class="num">03</div><div><b>Train the classifier</b><p>Encode categorical features and train a logistic regression model with a holdout split.</p></div></div>
+<div class="step"><div class="num">04</div><div><b>Review predictions</b><p>Evaluate output and use risk signals to help prioritize customer retention.</p></div></div>
+</div><div class="notice">This static page is hosted by GitHub Pages. It does not execute Python or load a serialized model, and its interactive score is a transparent demonstration only.</div><p style="margin-top:18px"><a href="https://github.com/Jayasri9717/customer-churn-prediction">↗ View source code and dataset on GitHub</a></p></aside>
+</div>
+<div class="footer"><span>Built for the Customer Churn Prediction project</span><span>Educational demo · Not a production decision system</span></div>
+</div>
+<script>
+const form=document.getElementById('churnForm');
+form.addEventListener('submit',function(e){e.preventDefault();
+const tenure=Number(document.getElementById('tenure').value), charges=Number(document.getElementById('charges').value), contract=document.getElementById('contract').value, internet=document.getElementById('internet').value, payment=document.getElementById('payment').value, paperless=document.getElementById('paperless').value;
+let score=18;
+if(tenure<12)score+=27;else if(tenure<24)score+=14;else if(tenure>48)score-=10;
+if(contract==='month')score+=25;else if(contract==='year')score+=7;else score-=13;
+if(charges>85)score+=12;else if(charges<35)score-=4;
+if(internet==='fiber')score+=7;
+if(payment==='electronic')score+=10;
+if(paperless==='yes')score+=3;
+score=Math.max(4,Math.min(94,score));
+const level=score>=60?'Higher illustrative risk':score>=38?'Moderate illustrative risk':'Lower illustrative risk';
+document.getElementById('resultTitle').textContent=level+' · '+score+'/100';
+document.getElementById('riskBar').style.width=score+'%';
+document.getElementById('riskBar').style.background=score>=60?'#ff8295':score>=38?'#f4c86a':'#4adebc';
+document.getElementById('resultText').textContent=score>=60?'Consider reviewing contract fit, service experience, and payment friction before the next renewal.':score>=38?'Consider a targeted check-in and review of service needs or billing preferences.':'Maintain service quality and continue regular engagement.';
+document.getElementById('result').classList.add('show');
+});
+</script>
+</body>
+</html>
